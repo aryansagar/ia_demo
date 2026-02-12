@@ -4,15 +4,12 @@ export default function VarietySection({ videoUrl }) {
   return (
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
-
         {/* Title */}
-        <h2 className="text-4xl font-bold text-center mb-16">
-          Variety
-        </h2>
+        <h2 className="text-4xl font-bold text-center mb-16">Variety</h2>
 
         {/* Cards */}
         <div className="flex flex-col  md:flex-row gap-12 justify-center items-center mb-20">
-          <VarietyCard 
+          <VarietyCard
             image="/images/variety/iTwinity.jpg"
             title="iTwinity"
             subtitle="Industrial Digital Twin"
@@ -28,12 +25,9 @@ export default function VarietySection({ videoUrl }) {
 
         {/* Detail Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          
           {/* Left Content */}
           <div>
-            <h3 className="text-3xl font-bold text-[#5A30D7] mb-4">
-              iTwinity
-            </h3>
+            <h3 className="text-3xl font-bold text-[#5A30D7] mb-4">iTwinity</h3>
 
             <p className="text-gray-700 leading-relaxed mb-6 font-freesans">
               An industrial digital twin is a virtual replica of machines,
@@ -66,20 +60,30 @@ export default function VarietySection({ videoUrl }) {
           </div>
 
           {/* Right Image */}
-          <div >
-          <video
-            // src={videoUrl}
-            src="/images/solutions/iTwinity.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-[370px] object-cover"
-          />
-        </div>
+          {/* <div>
+            <video
+              // src={videoUrl}
+              src="/images/solutions/iTwinity.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-contain"
+            />
+          </div> */}
 
+          {/* Right Video */}
+          <div className="aspect-video bg-black">
+            <video
+              src="/images/solutions/iTwinity.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
-
       </div>
     </section>
   );
