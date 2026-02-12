@@ -48,9 +48,11 @@ export default async function Home() {
       <Hero />
       <LogoBar />
       <KeyProblems />
-      <SolutionSection videoUrl={animationUrl} />
+      {/* <SolutionSection videoUrl={animationUrl} /> */}
+      <SolutionSection />
       <CoreCapabilities />
-      <VarietySection videoUrl={iTwinityUrl} />
+      {/* <VarietySection videoUrl={iTwinityUrl} /> */}
+      <VarietySection />
     </>
   );
 }
