@@ -1,4 +1,8 @@
-export default function Hero() {
+import { fetchVideo } from "../../lib/api";
+
+export default  async function Hero() {
+  const bannerVideo = await fetchVideo("banners");
+  console.log("Fetched Banner Video URL:", bannerVideo);
   return (
     <section className="relative w-full h-[90vh] overflow-hidden flex items-center">
       {/* Background Video */}
@@ -10,8 +14,7 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source
-          // src="http://localhost:1337/uploads/IAVERSE_New_stock_video_5ee022b9de.mp4"
-          src="/images/solutions/IAVERSE.mp4"
+          src={bannerVideo}
           type="video/mp4"
         />
       </video>

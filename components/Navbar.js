@@ -54,18 +54,18 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 text-gray-800 font-medium">
-          <a href="/" className="block hover:text-purple-600">Home</a>
-          <a href="/about" className="block hover:text-purple-600">About Us</a>
+          <a href="/" className="block hover:text-[#5A30D7]">Home</a>
+          <a href="/about" className="block hover:text-[#5A30D7]">About Us</a>
 
-          <div className="flex items-center gap-1 hover:text-purple-600">
+          <div className="flex items-center gap-1 hover:text-[#5A30D7]">
             <a href="/solutions">Solutions</a>
             <span className="text-sm">▼</span>
           </div>
 
-          <a href="/our-works" className="block hover:text-purple-600">Our Works</a>
-          <a href="/blogs" className="block hover:text-purple-600">Blogs</a>
+          <a href="/our-works" className="block hover:text-[#5A30D7]">Our Works</a>
+          <a href="/blogs" className="block hover:text-[#5A30D7]">Blogs</a>
 
-          <button className="w-full bg-[#5A30D7] text-white py-2 rounded-lg mt-2 hover:bg-purple-700 transition">
+          <button className="w-full bg-[#5A30D7] text-white py-2 rounded-lg mt-2 hover:bg-[#5A30D7] transition">
             Book a Demo
           </button>
         </div>

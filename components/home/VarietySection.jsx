@@ -1,8 +1,11 @@
 import VarietyCard from "./VarietyCard";
+import { fetchVideo } from "../../lib/api";
 
-export default function VarietySection({ videoUrl }) {
+export default async function VarietySection() {
+  const iTwinityVideo = await fetchVideo("i-twinities");
+  console.log("Fetched iTwinity Video URL:", iTwinityVideo);
   return (
-    <section className="py-20 px-6">
+    <section className="py-2 px-1">
       <div className="max-w-6xl mx-auto">
         {/* Title */}
         <h2 className="text-4xl font-bold text-center mb-16">Variety</h2>
@@ -59,23 +62,9 @@ export default function VarietySection({ videoUrl }) {
             </button>
           </div>
 
-          {/* Right Image */}
-          {/* <div>
+          <div>
             <video
-              // src={videoUrl}
-              src="/images/solutions/iTwinity.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-contain"
-            />
-          </div> */}
-
-          {/* Right Video */}
-          <div className="aspect-video bg-black">
-            <video
-              src="/images/solutions/iTwinity.mp4"
+              src={iTwinityVideo}
               autoPlay
               muted
               loop

@@ -10,38 +10,15 @@ import KeyProblems from "../components/home/KeyProblems";
 import SolutionSection from "../components/home/SolutionSection";
 import CoreCapabilities from "../components/home/CoreCapabilities";
 import VarietySection from "../components/home/VarietySection"
+import Webar from "../components/home/webar"
+import SectorSSection from "../components/home/SectorsSection";
+import ClientsSection from "../components/home/ClientsSection";
+import TestimonialsSection from "../components/home/TestimonialsSection";
+import { getTestimonials } from "../lib/api";
 
 export default async function Home() {
-  // const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const testimonials = await getTestimonials();
 
-  // const res = await fetch(
-  //   `${STRAPI_URL}/api/solutions?populate=animationVideo&populate=iTwinity`,
-  //   { next: { revalidate: 10 } }
-  // );
-
-  // const json = await res.json();
-
-  // // Find entry that has animationVideo
-  // const animationEntry = json?.data?.find(
-  //   (item) => item?.animationVideo
-  // );
-
-  // const animationPath = animationEntry?.animationVideo?.url;
-
-  // const animationUrl = animationPath
-  //   ? `${STRAPI_URL}${animationPath}`
-  //   : null;
-
-  // // Find entry that has iTwinity
-  // const iTwinityEntry = json?.data?.find(
-  //   (item) => item?.iTwinity
-  // );
-
-  // const iTwinityPath = iTwinityEntry?.iTwinity?.url;
-
-  // const iTwinityUrl = iTwinityPath
-  //   ? `${STRAPI_URL}${iTwinityPath}`
-  //   : null;
 
   return (
     <>
@@ -53,6 +30,10 @@ export default async function Home() {
       <CoreCapabilities />
       {/* <VarietySection videoUrl={iTwinityUrl} /> */}
       <VarietySection />
+      <Webar />
+      <SectorSSection />
+      <ClientsSection />
+      <TestimonialsSection testimonials={testimonials} />
     </>
   );
 }

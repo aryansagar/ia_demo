@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;Iaverse&gt; template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet">
+    <title>Generator by Iaverse</title>
+</head>
+<body>
+<style>
+    #info-button {
+        position: absolute;
+        top: 200px;
+        right: 10px;
+        font-size: 20px;
+        background: none;
+        border: none;
+        color: #000000;
+        cursor: pointer;
+    }
+
+    #audio-button {
+        position: absolute;
+        top: 240px;
+        right: 8px;
+        font-size: 20px;
+        background: none;
+        border: none;
+        color: #000000;
+        cursor: pointer;
+    }
+    
+    #anima{
+      background-image: url(play.png);
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 50px;
+      left: 49%;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+
+
+    #ins-1{
+      position: absolute;
+      font-size: medium;
+      background-color: #ffffff00;
+      left: 18%;
+      bottom: 80px;
+      color: #000000;
+
+    }
+
+    #zoomIn, #zoomOut {
+
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 81px;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+    #zoomIn{
+      background-image: url(zoom-in.png);
+      left: 15%;
+    }
+
+    #zoomOut{
+      background-image: url(zoom-out.png);
+      left: 85%;
+    }
+
+    #info {
+      background-image: url(information.png);
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      left: 20%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 50px;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+    #audio {
+      background-image: url(audio.png);
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      left: 80%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 50px;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+    #ar-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 1000;
+    }
+
+    #ar-popup p {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    #ar-popup button {
+        background: #4285f4;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 30px;
+    }
+
+    .Hotspot {
+      display: none;
+      background: #fff;
+      border-radius: 32px;
+      border: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      cursor: pointer;
+      height: 6px;
+      padding: 6px;
+      position: relative;
+      transition: opacity 0.3s;
+      width: 6px;
+}
+
+.Hotspot:not([data-visible]) {
+  background: transparent;
+  border: 4px solid #fff;
+  box-shadow: none;
+  height: 32px;
+  pointer-events: none;
+  width: 32px;
+}
+
+.Hotspot:focus {
+  border: 4px solid rgb(0, 128, 200);
+  height: 32px;
+  outline: none;
+  width: 32px;
+}
+
+.Hotspot > * {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+.HotspotAnnotation{
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.8);
+  display: none;
+  font-family: Futura, Helvetica Neue, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  left: calc(100% + 1em);
+  max-width: 128px;
+  overflow-wrap: break-word;
+  padding: 0.3em 1em;
+  position: absolute;
+  top: 50%;
+  width: max-content;
+}
+
+.Hotspot:not([data-visible]) > * {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-50% + 4px));
+  transition: transform 0.3s, opacity 0.3s;
+}
+#language-select {
+        background: none;
+        z-index: 999;
+        border-radius: 18px;
+        border: 2px solid #DADCE0;
+        color: #000000;
+        cursor: pointer;
+        font-size: 20px;
+        background: none;
+        color: #000000;
+        cursor: pointer;
+        position: absolute;
+        padding: 5px;
+        
+       
+    }
+
+  
+</style>
+
+<div style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
+  
+  <select id="language-select">
+      <option value="en" selected>English</option>
+      <option value="bn">বাংলা</option>
+      <option value="hi">हिंदी</option>
+  </select>
+</div>
+
+<model-viewer id="my-model" src="generatorCompressed.glb" iosSrc="generatorCompressed.glb"  quick-look-browsers="safari chrome" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="poster.webp"  min-camera-orbit='auto 0deg 2m' max-camera-orbit='auto 90deg 4m' shadow-intensity="1">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    
+    <button slot="ar-button" id="ar-button">
+        View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="ar_hand_prompt.png">
+    </div>
+      <div>
+        <button id="info">Info</button>
+        <button id="audio">Audio</button>
+        <button id="anima">Play</button>
+        <p id="ins-1"><img src="pinch.png" width="20px" height="20px"> Pinch to zoom in and zoom out</p>
+      </div>
+
+      <div id="ar-popup">
+        <p>Make sure the lighting of the area is optimal.</p>
+        <button id="proceed-button">Proceed</button>
+    </div>
+    <button class="Hotspot" slot="hotspot-1" data-surface="15 0 5010 4990 5011 0.089 0.875 0.036" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">High Pressure Vapour Outlet</div>
+      </button><button class="Hotspot" slot="hotspot-2" data-surface="15 0 10990 10991 11007 0.336 0.035 0.629" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Steam inlet</div>
+      </button><button class="Hotspot" slot="hotspot-3" data-surface="15 0 10650 10651 10742 0.314 0.125 0.561" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Chamber fire tube boiler</div>
+      </button><button class="Hotspot" slot="hotspot-4" data-surface="15 0 10553 10551 10554 0.169 0.333 0.498" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Water</div>
+      </button><button class="Hotspot" slot="hotspot-5" data-surface="15 0 10823 10824 10850 0.046 0.368 0.587" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Straight tubes
+          </div>
+      </button><button class="Hotspot" slot="hotspot-6" data-surface="15 0 10258 10256 10259 0.097 0.399 0.504" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Condensate outlet</div>
+      </button><button class="Hotspot" slot="hotspot-7" data-surface="15 0 25917 25918 25960 0.023 0.723 0.254" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Horse Turbine</div>
+      </button><button class="Hotspot" slot="hotspot-8" data-surface="15 0 25847 25848 25905 0.007 0.535 0.458" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">High pressure turbine blade</div>
+      </button><button class="Hotspot" slot="hotspot-9" data-surface="11 0 64 65 104 0.769 0.202 0.029" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Common Shaft</div>
+      </button><button class="Hotspot" slot="hotspot-10" data-surface="15 0 3669 3670 3685 0.663 0.179 0.157" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Rotor</div>
+      </button><button class="Hotspot" slot="hotspot-11" data-surface="0 0 32 0 33 0.006 0.528 0.467" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">AC generator</div>
+      </button><button class="Hotspot" slot="hotspot-12" data-surface="5 0 803 801 804 0.352 0.067 0.581" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">DC generator</div>
+      </button><button class="Hotspot" slot="hotspot-13" data-surface="8 0 464 465 525 0.169 0.240 0.592" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Rotor</div>
+      </button>
+  <div class="controls">
+    <div>
+      <p>Speed Control : <span id="speed-value"></span></p>
+      <input id="speedindex" type="range" min="0" max="10" step="1" value="1">
+    </div>
+    
+  </div>
+
+</model-viewer>
+
+<script>
+    const infoButton = document.getElementById('info');
+    const audioButton = document.getElementById('audio');
+    const animButton = document.getElementById('anima');
+    const hotspots = document.querySelectorAll('.Hotspot');
+    const hotspotLabels = document.querySelectorAll('.HotspotAnnotation');
+
+    // Add your audio element and source
+    const audioElement = new Audio('house turbine generator.mp3');
+
+    const instructionSound = new Audio('Audio for floor AR.mp3');
+
+
+    const arButton = document.getElementById('ar-button');
+    const arPopup = document.getElementById('ar-popup');
+
+    arButton.addEventListener('click', function() {
+        // Display the AR popup
+        arPopup.style.display = 'block';
+    });
+
+    const proceedButton = document.getElementById('proceed-button');
+    proceedButton.addEventListener('click', function() {
+        // Hide the AR popup when the "Proceed" button is clicked
+        arPopup.style.display = 'none';
+        instructionSound.play();
+    });
+
+
+    // Toggle audio play/pause on button click
+    audioButton.addEventListener('click', () => {
+      const selectedLanguage = languageSelect.value;
+    if (audioElement.paused) {
+        audioButton.textContent = languageMappings[selectedLanguage].audio; // Update to reflect selected language
+        audioButton.style.backgroundImage = 'url(mute.png)';
+        audioElement.play();
+        instructionSound.pause();
+    } else {
+        audioButton.textContent = languageMappings[selectedLanguage].audio; // Update to reflect selected language
+        audioButton.style.backgroundImage = 'url(audio.png)';
+        audioElement.pause();
+        instructionSound.pause();
+    }
+});
+
+    // Toggle visibility of hotspots and labels on info button click
+        document.addEventListener('DOMContentLoaded', function() {
+    // Initially hide hotspots and their labels
+    hotspots.forEach(hotspot => {
+        hotspot.style.display = 'none';
+    });
+
+    hotspotLabels.forEach(label => {
+        label.style.display = 'none';
+    });
+
+    // Toggle visibility of hotspots and labels on info button click
+    infoButton.addEventListener('click', () => {
+        hotspots.forEach(hotspot => {
+            const isHidden = hotspot.style.display === 'none';
+            hotspot.style.display = isHidden ? 'block' : 'none';
+        });
+
+        hotspotLabels.forEach(label => {
+            const isHidden = label.style.display === 'none';
+            label.style.display = isHidden ? 'block' : 'none';
+        });
+    });
+});
+
+
+    const speedInput = document.getElementById('speedindex');
+
+    const modelViewer = document.getElementById('my-model');
+
+    const speedValueDisplay = document.getElementById('speed-value');
+
+
+    const annotationClicked = (annotation) => {
+      let dataset = annotation.dataset;
+      modelViewer.cameraTarget = dataset.target;
+      modelViewer.cameraOrbit = dataset.orbit;
+      //modelViewer.fieldOfView = '45deg';
+    }
+
+  modelViewer.querySelectorAll('button').forEach((hotspot) => {
+    hotspot.addEventListener('click', () => annotationClicked(hotspot));
+  });
+
+  function updateAnimationSpeed() {
+        const speedValue = parseFloat(speedInput.value);
+        modelViewer.timeScale = speedValue;
+        speedValueDisplay.textContent = speedValue.toFixed(2);
+    }
+
+    speedInput.addEventListener('input', updateAnimationSpeed);
+
+
+ 
+  //Animation play-pause
+  animButton.addEventListener('click', () => {
+    console.log('Play button clicked');
+    const selectedLanguage = languageSelect.value;
+    if (modelViewer.paused) {
+        animButton.textContent = languageMappings[selectedLanguage].pause; // Update to reflect selected language
+        
+        animButton.style.backgroundImage = 'url(pause.png)';
+        modelViewer.play();
+        updateAnimationSpeed();
+        console.log('Model playing');
+        showOpacity();
+    } else {
+        animButton.textContent = languageMappings[selectedLanguage].play; // Update to reflect selected language
+        animButton.style.backgroundImage = 'url(play.png)';
+        modelViewer.pause();
+        console.log('Model paused');
+        hideOpacity();
+    }
+
+
+    function showOpacity(){
+      console.log( modelViewer.model.materials)
+      modelViewer.model.materials[3].setAlphaMode("BLEND");
+      modelViewer.model.materials[4].setAlphaMode("BLEND");
+      // modelViewer.model.materials[2].pbrMetallicRoughness.setBaseColorFactor('#cd795c');
+      // modelViewer.model.materials[6].pbrMetallicRoughness.setBaseColorFactor('#cd795c');
+      // modelViewer.model.materials[4].pbrMetallicRoughness.setBaseColorFactor('#cd795c');
+      // modelViewer.model.materials[5].pbrMetallicRoughness.setBaseColorFactor('#cd795c');
+    }
+
+    function hideOpacity(){
+      modelViewer.model.materials[3].setAlphaMode("OPAQUE");
+      modelViewer.model.materials[4].setAlphaMode("OPAQUE");
+      // modelViewer.model.materials[2].pbrMetallicRoughness.setBaseColorFactor('#ffffff');
+      // modelViewer.model.materials[6].pbrMetallicRoughness.setBaseColorFactor('#ffffff');
+
+    }
+  })
+
+  
+</script>
+
+
+<script>
+
+const hotspotsData = {
+    en: [
+        "High Pressure Vapour Outlet",
+        "Steam inlet",
+        "Chamber fire tube boiler",
+        "Water",
+        "Straight tubes",
+        "Condensate outlet",
+        "Horse Turbine",
+        "High pressure turbine blade",
+        "Common Shaft",
+        "Rotor",
+        "AC Generator",
+        "DC Generator",
+        "Exciter",
+        "Pinch to zoom in and zoom out",
+        "Speed Control"
+    ],
+    bn: [
+        "উচ্চ চাপ ভাপ আউটলেট",
+        "ভাপ ইনলেট",
+        "চেম্বার ফায়ার টিউব বয়লার",
+        "পানি",
+        "স্ট্রেইট টিউবস",
+        "কন্ডেনসেট আউটলেট",
+        "হর্স টারবাইন",
+        "উচ্চ চাপ টারবাইন ব্লেড",
+        "সাধারণ শাফট",
+        "রোটার",
+        "এসি জেনারেটর",
+        "ডিসি জেনারেটর",
+        "এক্সাইটার",
+        "পিন্চ করুন আর জুম ইন এবং জুম আউট",
+        "গতি নিয়ন্ত্রণ"
+    ],
+    hi: [
+        "उच्च दाब वाष्प आउटलेट",
+        "हावाई इनलेट",
+        "चैम्बर आग ट्यूब बॉयलर",
+        "पानी",
+        "सीधे ट्यूब्स",
+        "कंडेन्सेट आउटलेट",
+        "हाउस टरबाइन",
+        "उच्च दाब के टर्बाइन ब्लेड्स",
+        "सामान्य शाफ़्ट",
+        "रोटर",
+        "एसी जनरेटर",
+        "डीसी जनरेटर",
+        "एक्साइटर",
+        "पिंच करें और जूम इन और जूम आउट",
+        "गति नियंत्रण"
+    ]
+};
+
+// Update UI elements based on selected language
+function updateUI(language) {
+  infoButton.textContent = languageMappings[language].info;
+    audioButton.textContent = languageMappings[language].audio;
+    animButton.textContent = languageMappings[language].play;
+    audioElement.src = languageMappings[language].audioFile;
+    document.getElementById('ins-1').textContent = hotspotsData[language][15]; // Update text for "pinch to zoom in and zoom out"
+    document.querySelector('.controls p').textContent = hotspotsData[language][16]; // Update text for "speed control"
+    arPopup.querySelector('p').textContent = languageMappings[language].lightingInfo;
+    arButton.textContent = languageMappings[language].viewInYourSpace;
+    if (audioElement.paused) {
+        audioButton.style.backgroundImage = 'url(audio.png)';
+    } else {
+        audioButton.style.backgroundImage = 'url(mute.png)';
+    }
+}
+
+  const languageSelect = document.getElementById('language-select');
+  //  hotspotLabels = document.querySelectorAll('.HotspotAnnotation');
+
+  function updateHotspotLabels(language) {
+      hotspotLabels.forEach((label, index) => {
+          label.textContent = hotspotsData[language][index];
+      });
+  }
+
+  languageSelect.addEventListener('change', function() {
+      const selectedLanguage = this.value;
+      updateHotspotLabels(selectedLanguage);
+  });
+
+  // Initial update based on default language
+  updateHotspotLabels(languageSelect.value);
+
+  const languageMappings = {
+            en: {
+                info: 'Info',
+                audio: 'Audio',
+                play: 'Play',
+                pause: 'Pause',
+                audioFile: 'english.mp3',
+                lightingInfo: 'Make sure the lighting of the area is optimal.',
+                viewInYourSpace: 'View in your space'
+            },
+            bn: {
+                info: 'তথ্য',
+                audio: 'অডিও',
+                play: 'প্লে',
+                pause: 'থামান',
+                audioFile: 'bengali.mp3',
+                lightingInfo: 'এলাকার আলোকপাত সর্বোত্তম হওয়ার নিশ্চিত করুন।',
+                viewInYourSpace: 'আপনার স্থানে দেখুন'
+            },
+            hi: {
+                info: 'जानकारी',
+                audio: 'ऑडियो',
+                play: 'प्ले',
+                pause: 'रोकें',
+                audioFile: 'hindi.mp3',
+                lightingInfo: 'क्षेत्र के प्रकाश को सर्वोत्तम बनाएं।',
+                viewInYourSpace: 'अपने स्थान में देखें'
+            }
+        };
+
+  // Update UI elements based on selected language
+  // function updateUI(language) {
+  //     infoButton.textContent = languageMappings[language].info;
+  //     audioButton.textContent = languageMappings[language].audio;
+  //     animButton.textContent = languageMappings[language].play;
+  //     audioElement.src = languageMappings[language].audioFile;
+  //     console.log(audioElement.src);
+  // }
+
+  // Add event listener for language selection
+  languageSelect.addEventListener('change', function() {
+      const selectedLanguage = this.value;
+      updateUI(selectedLanguage);
+  });
+
+  // Initial update based on default language
+  updateUI(languageSelect.value);
+</script>
+
+
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</body>
+</html>

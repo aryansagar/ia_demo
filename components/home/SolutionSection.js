@@ -1,4 +1,7 @@
-export default function SolutionSection({ videoUrl }) {
+import { fetchVideo } from "../../lib/api";
+
+export default async function SolutionSection() {
+  const solutionVideo = await fetchVideo("solutions"); 
   return (
     <section className="px-6 py-4 max-w-7xl mx-auto">
       <h2 className="text-4xl font-bold text-center mb-10">Solution</h2>
@@ -7,7 +10,7 @@ export default function SolutionSection({ videoUrl }) {
         <div>
           <video
             // src={videoUrl}
-            src="/images/solutions/solution.mp4"
+            src={solutionVideo}
             autoPlay
             muted
             loop
